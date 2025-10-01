@@ -1,0 +1,16 @@
+{
+    "name": "John Doe",
+    "age": 30,
+    "hobbies": ["reading", "gaming"]
+}
+
+// {} = The entire form
+
+// "name": "John Doe" = One question and answer
+
+// [] = A list of items
+
+// Collections vs Documents
+// Collection = A folder for resumes (all similar documents)
+
+// Document = One person's resume (the actual data)
