@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profiles Viewer — Profiles</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Profiles</h1>
+      <nav>
+        <a class="btn" href="/">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Add user form -->
+    <section class="card form-card">
+      <h2>Add New User</h2>
+      <form id="addUserForm">
+        <div class="form-row">
+          <input type="text" id="name" placeholder="Full name" required />
+          <input type="email" id="email" placeholder="Email" required />
+        </div>
+        <div class="form-row">
+          <input type="number" id="age" placeholder="Age" />
+          <input type="text" id="avatarUrl" placeholder="Avatar URL (optional)" />
+        </div>
+        <textarea id="bio" placeholder="Short bio"></textarea>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Add User</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Users list -->
+    <section class="card">
+      <h2>Users</h2>
+      <div id="usersList" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Profiles Viewer • CRUD demo with MongoDB</div>
+  </footer>
+
+  <script src="/js/profiles.js"></script>
+</body>
+</html>
