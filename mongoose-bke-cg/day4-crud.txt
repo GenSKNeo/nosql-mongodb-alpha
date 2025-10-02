@@ -1,0 +1,5 @@
+Create = insertOne() / insertMany()
+Read = find() (with filters)
+Update = updateOne() / updateMany()
+Delete = deleteOne() / deleteMany()
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1><%= title %></h1>
+
+  <!-- Add User Form -->
+  <form action="/users" method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="number" name="age" placeholder="Age">
+    <button type="submit">Add User</button>
+  </form>
+
+  <!-- Display Users -->
+  <h2>Users List</h2>
+  <ul>
+    <% if (users && users.length > 0) { %>
+      <% users.forEach(user => { %>
+        <li>
+          <strong><%= user.name %></strong> - <%= user.email %>
+          <% if (user.hobbies && user.hobbies.length > 0) { %>
+            <p>Hobbies: <%= user.hobbies.join(", ") %></p>
+          <% } %>
+          <% if (user.skills && user.skills.length > 0) { %>
+            <p>Skills: <%= user.skills.join(", ") %></p>
+          <% } %>
+        </li>
+      <% }) %>
+    <% } else { %>
+      <li>No users yet. Add one above!</li>
+    <% } %>
+  </ul>
+</body>
+</html>
