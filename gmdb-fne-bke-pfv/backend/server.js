@@ -1,51 +1,41 @@
-// Load environment variables from .env file
-require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
 
-// Import Express framework
-const express = require('express');
-// Mongoose to talk to MongoDB
-const mongoose = require('mongoose');
-// CORS to allow frontend calls (if served separately)
-const cors = require('cors');
+const userRoutes = require("./routes/userRoutes");
 
-// Create Express app
 const app = express();
-
-// Read port and MongoDB URI from environment variables (or defaults)
-const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
-
-// Middlewares:
-// Parse incoming JSON bodies
-app.use(express.json());
-// Serve static files from /public (frontend)
-app.use(express.static('public'));
-// Enable CORS for API access (safe for local development)
 app.use(cors());
+app.use(express.json());
 
-// Connect to MongoDB using Mongoose
-mongoose
-  .connect(MONGODB_URI, {
-    // Mongoose 7+ has sensible defaults; options left minimal
-  })
-  .then(() => {
-    console.log('✅ Connected to MongoDB');
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB connection error:', err.message);
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.error(err));
+
+// Routes
+app.use("/api/users", userRoutes);
+
+// Home route for learning modules
+app.get("/", (req, res) => {
+  res.json({
+    module: "Non-relational Databases and MongoDB",
+    items: [
+      "Introduction to NoSQL Databases",
+      "Basics of Document-Based Databases",
+      "Set Up MongoDB Environment for NoSQL",
+      "Insert and Find Documents",
+      "Query Documents and Query Operators",
+      "Query Arrays and Nested Documents",
+      "Update and Delete Documents",
+      "Connecting to Mongoose Driver in Backend"
+    ]
   });
-
-// Import routes for users API
-const usersRouter = require('./routes/users');
-// Mount the router under /api/users
-app.use('/api/users', usersRouter);
-
-// For any other path (SPA fallback), serve index.html (optional)
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

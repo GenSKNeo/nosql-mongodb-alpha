@@ -1,0 +1,8 @@
+frontend/src/
+ ├── components/
+ │   ├── Navbar.js
+ │   ├── UserList.js
+ │   ├── UserForm.js
+ │   └── Home.js
+ ├── App.js
+ ├── index.js
