@@ -13,7 +13,8 @@ const app = express();
 
 // Read port and MongoDB URI from environment variables (or defaults)
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
+// check .env variable MONGO_URI or MONGODB_URI
+const MONGODB_URI = process.env.MONGO_URI; 
 
 // Middlewares:
 // Parse incoming JSON bodies

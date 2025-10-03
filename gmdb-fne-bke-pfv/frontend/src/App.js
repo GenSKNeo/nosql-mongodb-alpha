@@ -1,45 +1,43 @@
-import React, { useState, useEffect } from "react";
+// import React from "react";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import Navbar from "./components/Navbar";
+// import Home from "./components/Home";
+// import UserList from "./components/UserList";
+
+// function App() {
+//   return (
+//     <Router>
+//       <Navbar />
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/users" element={<UserList />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+// export default App;
+
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Home from "./components/Home";
 import UserList from "./components/UserList";
-import UserForm from "./components/UserForm";
-import "./App.css";
+import Footer from "./components/Footer";  // Import the Footer
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [editingUser, setEditingUser] = useState(null);
-
-  // Fetch users from backend
-  useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-      .catch((err) => console.error(err));
-  }, []);
-
-  // Delete user
-  const deleteUser = async (id) => {
-    await fetch(`http://localhost:5000/users/${id}`, { method: "DELETE" });
-    setUsers(users.filter((user) => user._id !== id));
-  };
-
   return (
-    <div>
-      <Navbar />
-      <div className="container">
-        <h2>Manage Users</h2>
-        <UserForm
-          editingUser={editingUser}
-          setEditingUser={setEditingUser}
-          users={users}
-          setUsers={setUsers}
-        />
-        <UserList
-          users={users}
-          setEditingUser={setEditingUser}
-          deleteUser={deleteUser}
-        />
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/users" element={<UserList />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
-    </div>
+    </Router>
   );
 }
 
